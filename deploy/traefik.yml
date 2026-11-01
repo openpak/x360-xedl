@@ -1,0 +1,14 @@
+# Merge into the primary's shared ~/openpak/deploy/traefik/dynamic.yml. The gateway forwards
+# Live service 11 here.
+http:
+  routers:
+    x360-xedl-web:
+      entryPoints: [web]
+      rule: PathPrefix(`/xedl`)
+      priority: 40
+      service: x360-xedl-http
+  services:
+    x360-xedl-http:
+      loadBalancer:
+        servers:
+        - url: http://openpak-x360-xedl:10011
